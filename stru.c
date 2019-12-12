@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>//Inclui as funções relacionadas as strings 
 
 struct pessoa{
 char nome[20];
@@ -15,14 +16,14 @@ char cor_Fav[20];
 //https://stackoverflow.com/questions/15326729/check-if-a-character-is-a-space
 //https://www.tutorialspoint.com/c_standard_library/c_function_fgets.htm
 
-//Arrumar funções pegaNome e pegaCor para parar quando encontrarem um espaço em branco 
+//Arrumar funções pegaNome e pegaCor para parar quando encontrarem um espaço em branco pararem. Erro esta apontando um valor de ponteiro 
 void pegaNome(FILE *F,struct pessoa *p){
 int i=0;
-while(p->nome[i] != ' '){
-fgets(p->nome,1,F);
+while(strcmp(&p->nome[i], " ")==0)
+fgets(&p->nome[i],i,F);
 i++;
 }
-}
+
 
 
 void pegaCor(FILE *F,struct pessoa *p){
@@ -31,12 +32,12 @@ fgets(p->cor_Fav,sizeof p->cor_Fav,F);
 }
 
 void pegaDados(FILE *F,struct pessoa *p){
-
 pegaNome(F,p);
+//fscanf(F,"%s",p->nome);
 fscanf(F,"%d",&p->idade);
 fscanf(F,"%f",&p->altura);
 fscanf(F,"%f",&p->peso);
-pegaCor(F,p);
+fscanf(F,"%s",p->cor_Fav);
 }
 
 void imprimeDados(struct pessoa *p){
