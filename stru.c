@@ -16,24 +16,22 @@ char cor_Fav[20];
 //https://stackoverflow.com/questions/15326729/check-if-a-character-is-a-space
 //https://www.tutorialspoint.com/c_standard_library/c_function_fgets.htm
 
+
+/*Explicação de como o fgets para em C: https://stackoverflow.com/questions/1555731/how-to-take-whitespace-in-input-in-c*/
+
 //Arrumar funções pegaNome e pegaCor para parar quando encontrarem um espaço em branco pararem. Erro esta apontando um valor de ponteiro 
 void pegaNome(FILE *F,struct pessoa *p){
-int i=0;
-while(strcmp(&p->nome[i], " ")==0)
-fgets(&p->nome[i],i,F);
-i++;
+fgets(p->nome,20,F);// fgets pega até um new line, melhor usar ele para pegar strings em sequencias de novas linhas do que palavras até o espaço, também é muito boa para evitar o overflow
 }
 
 
 
 void pegaCor(FILE *F,struct pessoa *p){
-fgets(p->cor_Fav,sizeof p->cor_Fav,F);
-
+fgets(p->cor_Fav,20,F);// fgets pega até um new line, melhor usar ele para pegar strings em sequencias de novas linhas do que palavras até o espaço, também é muito boa para evitar o overflow
 }
 
 void pegaDados(FILE *F,struct pessoa *p){
-pegaNome(F,p);
-//fscanf(F,"%s",p->nome);
+fscanf(F,"%s",p->nome);
 fscanf(F,"%d",&p->idade);
 fscanf(F,"%f",&p->altura);
 fscanf(F,"%f",&p->peso);
