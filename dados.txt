@@ -1,3 +1,4 @@
+Ana Clara 25 1.67 55 Vermelho
 Carlos 20 1.70 68.5 Azul
 Ana 32 1.40 48.5 Verde
 Luis 18 1.89 70 Roxo

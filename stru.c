@@ -2,7 +2,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>//Inclui as funções relacionadas as strings 
+//#include <string.h>//Inclui as funções relacionadas as strings 
+#include <ctype.h>//Serve para classificar caracteres 
 
 struct pessoa{
 char nome[20];
@@ -21,7 +22,33 @@ char cor_Fav[20];
 
 //Arrumar funções pegaNome e pegaCor para parar quando encontrarem um espaço em branco pararem. Erro esta apontando um valor de ponteiro 
 void pegaNome(FILE *F,struct pessoa *p){
-fgets(p->nome,20,F);// fgets pega até um new line, melhor usar ele para pegar strings em sequencias de novas linhas do que palavras até o espaço, também é muito boa para evitar o overflow
+char nome[20];
+int cont = 0;
+int i = 0;
+//Funciona, mas pega coisa a mais
+/*fgets(nome,20,F);// fgets pega até um new line, melhor usar ele para pegar strings em sequencias de novas linhas do que palavras até o espaço, também é muito boa para evitar o overflow
+while(1){
+if(isspace(nome[i])!=0) cont++;
+if(cont == 2){
+p->nome[i+1] = '\0';
+break;
+} 
+p->nome[i]=nome[i];
+i++;
+}*/
+
+//Erro de alocaçâo de memoria, não aloca tudo 
+while(1){
+    fgets(&p->nome[i],1,F);
+    if(isspace(p->nome)!=0) cont++;
+            if(cont == 2){
+             p->nome[i+1]='\0';
+             break;
+         }
+    i++;     
+}   
+
+
 }
 
 
@@ -31,7 +58,8 @@ fgets(p->cor_Fav,20,F);// fgets pega até um new line, melhor usar ele para pega
 }
 
 void pegaDados(FILE *F,struct pessoa *p){
-fscanf(F,"%s",p->nome);
+pegaNome(F,p);
+//fscanf(F,"%s",p->nome);
 fscanf(F,"%d",&p->idade);
 fscanf(F,"%f",&p->altura);
 fscanf(F,"%f",&p->peso);
