@@ -36,19 +36,13 @@ break;
 p->nome[i]=nome[i];
 i++;
 }*/
+//Fgetc -> https://stackoverflow.com/questions/33968157/how-to-read-characters-from-a-file-until-a-space-and-store-that-as-one-string-c
 
 //Erro de alocaçâo de memoria, não aloca tudo 
-while(1){
-    fgets(&p->nome[i],1,F);
-    if(isspace(p->nome)!=0) cont++;
-            if(cont == 2){
-             p->nome[i+1]='\0';
-             break;
-         }
-    i++;     
-}   
+// Ao inves de usar o fgets para pegar a informação, primeiro vejo o tamanho da file ate o espaço e então faço o fgets pegar aquilo
 
-
+//https://www.tutorialspoint.com/cprogramming/c_file_io.htm
+//https://stackoverflow.com/questions/25651924/what-is-a-stream-exactly
 }
 
 
