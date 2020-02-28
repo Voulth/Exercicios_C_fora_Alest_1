@@ -1,20 +1,20 @@
 #include <stdio.h>
 
 struct data {
-  int dia, mes, ano;
+  int dia, mes, ano;    //Cria a struct data que contem dia, mes ano
 };
 
-struct niver {
+struct niver { //Cria a struct aniversario que contem a data e o nome do aniversariante 
   struct data data;
   char nome[10];
 };
 
-void pegadata( FILE * f, struct data * d ) {
+void pegadata( FILE * f, struct data * d ) {//Função para pegar data do arquivo 
   char c;
   fscanf( f, "%d%c%d%c%d", &d->dia, &c, &d->mes, &c, &d->ano );
 }
 
-void peganiver( FILE * f, struct niver * d ) {
+void peganiver( FILE * f, struct niver * d ) {//irei pegar a data  e o nome das pessoas 
   pegadata( f, &d->data );
   fscanf( f, " " );
   fgets( d->nome, 10, f );
@@ -40,9 +40,9 @@ int existedata( struct data * d ) {
 
 const int Max = 100;
 
-void main() {
+int main() {
   struct niver niver[Max];
-  FILE *arq = fopen( "datas", "r" );
+  FILE *arq = fopen( "dados", "r" );
 
   if ( arq == NULL )
     printf( "Nao consegui abrir arquivo\n" );
